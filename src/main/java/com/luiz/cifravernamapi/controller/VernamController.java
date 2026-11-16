@@ -25,7 +25,7 @@ public class VernamController {
     public VernamResponse cifrar(@Valid @RequestBody VernamRequest request) {
 
         String resultado = vernamService.cifrar(
-            request.getTextoclaro(),
+            request.getTextoClaro(),
             request.getChave()
         );
 
@@ -39,7 +39,7 @@ public class VernamController {
     public VernamResponse decifrar(@Valid @RequestBody VernamRequest request) {
 
         String resultado = vernamService.decifrar(
-            request.getTextoclaro(),
+            request.getTextoClaro(),
             request.getChave()
         );
 

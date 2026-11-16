@@ -11,11 +11,11 @@ public class VernamRequest {
     @NotBlank(message = "A chave não pode estar vazia.")
     private String chave;
 
-    public String getTextoclaro() {
+    public String getTextoClaro() {
         return textoclaro;
     }
 
-    public void setTextoclaro(String textoclaro) {
+    public void setTextoClaro(String textoclaro) {
         this.textoclaro = textoclaro;
     }
 
