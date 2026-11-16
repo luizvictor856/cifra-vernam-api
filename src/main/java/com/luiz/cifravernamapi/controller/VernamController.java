@@ -1,3 +1,4 @@
+
 package com.luiz.cifravernamapi.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,35 +21,31 @@ public class VernamController {
         this.vernamService = vernamService;
     }
 
+    @PostMapping("/cifrar")
+    public VernamResponse cifrar(@Valid @RequestBody VernamRequest request) {
 
-@PostMapping("/criptografar")
-public VernamResponse criptografar(@Valid @RequestBody VernamRequest request) {
+        String resultado = vernamService.cifrar(
+            request.getTextoclaro(),
+            request.getChave()
+        );
 
-    String resultado = vernamService.criptografar(
-        request.getMensagem(),
-        request.getChave()
-    );
+        VernamResponse response = new VernamResponse();
+        response.setResultado(resultado);
 
-    VernamResponse response = new VernamResponse();
-    response.setResultado(resultado);
+        return response;
+    }
 
-    return response;
-}
+    @PostMapping("/decifrar")
+    public VernamResponse decifrar(@Valid @RequestBody VernamRequest request) {
 
+        String resultado = vernamService.decifrar(
+            request.getTextoclaro(),
+            request.getChave()
+        );
 
-@PostMapping ("/descriptografar")
+        VernamResponse response = new VernamResponse();
+        response.setResultado(resultado);
 
-public VernamResponse descroptografar(@Valid @RequestBody VernamRequest request) {
-
-    String resultado = vernamService.descriptografar (
-        request.getMensagem(),
-        request.getChave()
-    );
-
-    VernamResponse response = new VernamResponse();
-    response.setResultado(resultado);
-
-    return response;
-}
-
+        return response;
+    }
 }
