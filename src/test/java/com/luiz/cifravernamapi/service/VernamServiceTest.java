@@ -16,14 +16,14 @@ public class VernamServiceTest {
 
         // Criptografando a mensagem
         String mensagemCriptografada =
-                service.criptografar(mensagem, chave);
+                service.cifrar(mensagem, chave);
 
         // Verificando se o resultado é diferente da mensagem original
         assertNotEquals(mensagem, mensagemCriptografada);
 
         // Descriptografando a mensagem
         String mensagemOriginal =
-                service.descriptografar(mensagemCriptografada, chave);
+                service.decifrar(mensagemCriptografada, chave);
 
         // Verificando se recuperamos a mensagem original
         assertEquals(mensagem, mensagemOriginal);
