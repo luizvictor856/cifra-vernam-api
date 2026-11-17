@@ -1,14 +1,15 @@
+
 package com.luiz.cifravernamapi.dto;
 
 public class VernamResponse {
 
-    private String resultado;
+    private String textoCifrado;
 
-    public String getResultado() {
-        return resultado;
+    public String getTextoCifrado() {
+        return textoCifrado;
     }
 
-    public void setResultado(String resultado) {
-        this.resultado = resultado;
+    public void setTextoCifrado(String textoCifrado) {
+        this.textoCifrado = textoCifrado;
     }
-}   
+}

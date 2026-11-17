@@ -7,25 +7,22 @@ import static org.junit.jupiter.api.Assertions.*;
 public class VernamServiceTest {
 
     @Test
-    public void deveCriptografarEDescriptografarMensagem() {
+    public void deveCifrarEDecifrarMensagem() {
 
         VernamService service = new VernamService();
 
         String mensagem = "OLA MUNDO";
         String chave = "123456789";
 
-        // Criptografando a mensagem
-        String mensagemCriptografada =
-                service.cifrar(mensagem, chave);
+        String mensagemCifrada = service.cifrar(mensagem, chave);
 
-        // Verificando se o resultado é diferente da mensagem original
-        assertNotEquals(mensagem, mensagemCriptografada);
+        assertTrue(mensagemCifrada.matches("[01]+"));
 
-        // Descriptografando a mensagem
-        String mensagemOriginal =
-                service.decifrar(mensagemCriptografada, chave);
+        String mensagemOriginal = service.decifrar(
+            mensagemCifrada,
+            chave
+        );
 
-        // Verificando se recuperamos a mensagem original
         assertEquals(mensagem, mensagemOriginal);
     }
 }

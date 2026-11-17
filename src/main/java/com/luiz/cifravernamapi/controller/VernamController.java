@@ -1,14 +1,13 @@
 
 package com.luiz.cifravernamapi.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.luiz.cifravernamapi.dto.VernamRequest;
-import com.luiz.cifravernamapi.dto.VernamResponse;
 import com.luiz.cifravernamapi.service.VernamService;
+
 import jakarta.validation.Valid;
 
 @RestController
@@ -21,31 +20,35 @@ public class VernamController {
         this.vernamService = vernamService;
     }
 
-    @PostMapping("/cifrar")
-    public VernamResponse cifrar(@Valid @RequestBody VernamRequest request) {
+    @PostMapping(
+        value = "/cifrar",
+        produces = MediaType.TEXT_PLAIN_VALUE
+    )
+    public ResponseEntity<String> cifrar(
+            @Valid @RequestBody VernamRequest request) {
 
         String resultado = vernamService.cifrar(
             request.getTextoClaro(),
             request.getChave()
         );
 
-        VernamResponse response = new VernamResponse();
-        response.setResultado(resultado);
-
-        return response;
+        return ResponseEntity.ok(resultado);
     }
 
-    @PostMapping("/decifrar")
-    public VernamResponse decifrar(@Valid @RequestBody VernamRequest request) {
+    @PostMapping(
+        value = "/decifrar",
+        consumes = MediaType.TEXT_PLAIN_VALUE,
+        produces = MediaType.TEXT_PLAIN_VALUE
+    )
+    public ResponseEntity<String> decifrar(
+            @RequestBody String textoCifrado,
+            @RequestParam String chave) {
 
         String resultado = vernamService.decifrar(
-            request.getTextoClaro(),
-            request.getChave()
+            textoCifrado,
+            chave
         );
 
-        VernamResponse response = new VernamResponse();
-        response.setResultado(resultado);
-
-        return response;
+        return ResponseEntity.ok(resultado);
     }
 }
