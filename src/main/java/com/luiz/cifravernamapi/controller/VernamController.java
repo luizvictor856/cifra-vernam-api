@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.luiz.cifravernamapi.dto.VernamRequest;
+import com.luiz.cifravernamapi.dto.VernamDecifrarRequest;
 import com.luiz.cifravernamapi.service.VernamService;
 
 import jakarta.validation.Valid;
@@ -35,22 +36,19 @@ public class VernamController {
         return ResponseEntity.ok(resultado);
     }
 
-   
     @PostMapping(
-    value = "/decifrar",
-    consumes = MediaType.TEXT_PLAIN_VALUE,
-    produces = MediaType.TEXT_PLAIN_VALUE
-)
+        value = "/decifrar",
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.TEXT_PLAIN_VALUE
+    )
     public ResponseEntity<String> decifrar(
-        @RequestBody String textoCifrado,
-        @RequestParam String chave) {
+            @Valid @RequestBody VernamDecifrarRequest request) {
 
-    String resultado = vernamService.decifrar(
-        textoCifrado,
-        chave
-    );
+        String resultado = vernamService.decifrar(
+            request.getTextoCifrado(),
+            request.getChave()
+        );
 
-    return ResponseEntity.ok(resultado);
-}
-
+        return ResponseEntity.ok(resultado);
+    }
 }
