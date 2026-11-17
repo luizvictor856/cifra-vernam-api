@@ -35,20 +35,22 @@ public class VernamController {
         return ResponseEntity.ok(resultado);
     }
 
+   
     @PostMapping(
-        value = "/decifrar",
-        consumes = MediaType.TEXT_PLAIN_VALUE,
-        produces = MediaType.TEXT_PLAIN_VALUE
-    )
+    value = "/decifrar",
+    consumes = MediaType.TEXT_PLAIN_VALUE,
+    produces = MediaType.TEXT_PLAIN_VALUE
+)
     public ResponseEntity<String> decifrar(
-            @RequestBody String textoCifrado,
-            @RequestParam String chave) {
+        @RequestBody String textoCifrado,
+        @RequestParam String chave) {
 
-        String resultado = vernamService.decifrar(
-            textoCifrado,
-            chave
-        );
+    String resultado = vernamService.decifrar(
+        textoCifrado,
+        chave
+    );
 
-        return ResponseEntity.ok(resultado);
-    }
+    return ResponseEntity.ok(resultado);
+}
+
 }
